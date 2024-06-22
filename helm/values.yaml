@@ -5,6 +5,10 @@ image:
   version: latest
   pullPolicy: IfNotPresent
 
+imagePullSecrets:
+  - name: regcred
+
+
 # EUM configuration
 # Provide your key and set the endpoint
 eum:
