@@ -19,7 +19,7 @@ spec:
       {{ end }}
       containers:
       - name: ratings
-        image: {{ .Values.image.repo }}/rs-gokulsm/ratings:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/rs-ratings:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 80
@@ -39,15 +39,3 @@ spec:
           failureThreshold: 30
           successThreshold: 1
       restartPolicy: Always
-      {{- with .Values.gokulsm/ratings.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/ratings.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/ratings.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
