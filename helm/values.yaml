@@ -37,32 +37,32 @@ ocCreateRoute: false
 #   tolerations: []
 ######################################
 
-cart: {}
+gokulsm/cart: {}
 
-catalogue: {}
+gokulsm/catalogue: {}
 
-dispatch: {}
+gokulsm/dispatch: {}
 
-mongodb: {}
+gokulsm/mongodb: {}
 
-mysql: {}
+gokulsm/mysql: {}
 
-payment:
+gokulsm/payment:
   # Alternative payment gateway URL
   # Default is https://www.paypal.com
   gateway: null
   #gateway: https://www.worldpay.com
 
-rabbitmq: {}
+gokulsm/rabbitmq: {}
 
-ratings: {}
+gokulsm/ratings: {}
 
 redis:
   # Storage class to use with redis statefulset.
   storageClassName: standard
 
-shipping: {}
+gokulsm/shipping: {}
 
-user: {}
+gokulsm/user: {}
 
-web: {}
+gokulsm/web: {}
