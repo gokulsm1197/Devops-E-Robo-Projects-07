@@ -43,7 +43,7 @@ gokulsm/catalogue: {}
 
 gokulsm/dispatch: {}
 
-gokulsm/mongodb: {}
+gokulsm/mongo: {}
 
 gokulsm/mysql: {}
 
