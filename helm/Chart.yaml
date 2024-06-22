@@ -1,6 +1,6 @@
 apiVersion: v1
 name: robot-shop
 version: 1.1.0
-home: https://github.com/gokulsm1197/robot-shop.git
+home: https://github.com/gokulsm1197/gokulsm-k8s-project.git
 description: Sample micoservices application
 
