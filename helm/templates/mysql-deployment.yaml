@@ -19,7 +19,7 @@ spec:
       {{ end }}
       containers:
       - name: mysql
-        image: {{ .Values.image.repo }}/rs-gokulsm/mysql-db:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/rs-mysql-db:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         # added for Istio
         securityContext:
@@ -35,15 +35,3 @@ spec:
             cpu: 100m
             memory: 700Mi
       restartPolicy: Always
-      {{- with .Values.gokulsm/mysql.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/mysql.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/mysql.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
