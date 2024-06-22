@@ -38,15 +38,15 @@ spec:
             cpu: 100m
             memory: 50Mi
       restartPolicy: Always
-      {{- with .Values.web.affinity }}
+      {{- with .Values.gokulsm/web.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.web.nodeSelector }}
+      {{- with .Values.gokulsm/web.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.web.tolerations }}
+      {{- with .Values.gokulsm/web.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
