@@ -19,7 +19,7 @@ spec:
       {{ end }}
       containers:
       - name: cart
-        image: {{ .Values.image.repo }}/rs-cart:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/rs-gokulsm/cart:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         # agent networking access
         env:
@@ -36,15 +36,15 @@ spec:
           requests:
             cpu: 100m
             memory: 50Mi
-      {{- with .Values.cart.affinity }}
+      {{- with .Values.gokulsm/cart.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.cart.nodeSelector }}
+      {{- with .Values.gokulsm/cart.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.cart.tolerations }}
+      {{- with .Values.gokulsm/cart.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
