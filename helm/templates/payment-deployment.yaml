@@ -22,7 +22,7 @@ spec:
       {{ end }}
       containers:
       - name: payment
-        image: {{ .Values.image.repo }}/rs-gokulsm/payment:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/rs-payment:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         # agent networking access
         env:
@@ -30,9 +30,9 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-          {{- if .Values.gokulsm/payment.gateway }}
+          {{- if .Values.payment.gateway }}
           - name: PAYMENT_GATEWAY
-            value: {{ .Values.gokulsm/payment.gateway }}
+            value: {{ .Values.payment.gateway }}
           {{- end }}
         ports:
         - containerPort: 8080
@@ -44,15 +44,3 @@ spec:
             cpu: 100m
             memory: 50Mi
       restartPolicy: Always
-      {{- with .Values.gokulsm/payment.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/payment.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/payment.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
