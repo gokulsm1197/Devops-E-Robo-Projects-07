@@ -19,7 +19,7 @@ spec:
       {{ end }}
       containers:
       - name: shipping
-        image: {{ .Values.image.repo }}/rs-shipping:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/rs-gokulsm/shipping:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 8080
@@ -40,15 +40,15 @@ spec:
           failureThreshold: 30
           successThreshold: 1
       restartPolicy: Always
-      {{- with .Values.shipping.affinity }}
+      {{- with .Values.gokulsm/shipping.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.shipping.nodeSelector }}
+      {{- with .Values.gokulsm/shipping.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.shipping.tolerations }}
+      {{- with .Values.gokulsm/shipping.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
