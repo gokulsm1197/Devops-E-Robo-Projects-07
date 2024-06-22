@@ -40,15 +40,3 @@ spec:
           failureThreshold: 30
           successThreshold: 1
       restartPolicy: Always
-      {{- with .Values.gokulsm/shipping.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/shipping.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.gokulsm/shipping.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
