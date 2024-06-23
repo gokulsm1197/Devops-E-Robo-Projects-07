@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_REGISTRY = 'gokulsm' // Set your Docker Hub username here
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                git credentialsId: 'git', url: 'https://github.com/gokulsm1197/robot-shop.git'
+            }
+        }
+
+        stage('Build and Push Docker Images') {
+            steps {
+                script {
+                    // Define an array of apps to build
+                    def apps = ['cart', 'catalogue','dispatch','mongo','mysql','payment','ratings','shipping','user','web']
+                    
+                    for (app in apps) {
+                        def imageName = "${DOCKER_REGISTRY}/${app}:latest"
+                        
+                        // Build the Docker image
+                        sh "docker build -t ${imageName} ${app}"
+
+                        // Push the Docker image
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                            sh """
+                            echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
+                            docker push ${imageName}
+                            """
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
