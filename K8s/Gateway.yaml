@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: web
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - e-robo.com
+    port:
+      name: http
+      number: 80
+      protocol: HTTP  
