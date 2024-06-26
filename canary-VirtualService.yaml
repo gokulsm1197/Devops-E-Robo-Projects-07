@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: web-VirtualService
+spec:
+  gateways:
+    - web-Gateway
+  hosts:
+    - e-robo.com
+  http:
+    - route:
+        - destination:
+            host: web.svc.cluster.local
+            port:
+              number: 8080
+            subset: v1
+          weight: 50
+        - destination:
+             host: web.svc.cluster.local
+             port:
+               number: 8080
+             subset: v1
+          weight: 50
