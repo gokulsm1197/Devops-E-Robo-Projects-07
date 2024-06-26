@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-v2
+  labels:
+    service: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: web
+      app: web
+      version: v2
+  template:
+    metadata:
+      labels:
+        service: web
+        app: web
+        version: v2
+    spec:
+      containers:
+      - image: gokulsm/canary
+        imagePullPolicy: IfNotPresent
+        name: web-v2
+        ports:
+        - containerPort: 8080
