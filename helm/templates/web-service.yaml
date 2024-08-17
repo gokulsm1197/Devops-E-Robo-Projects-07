@@ -14,5 +14,5 @@ spec:
   {{ if .Values.nodeport }}
   type: NodePort
   {{ else }}
-  type: NodePort
+  type: LoadBalancer
   {{ end }}
