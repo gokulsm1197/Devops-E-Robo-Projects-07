@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-web-app
+  name: shop
   labels:
-    app: go-web-app
+    app: shop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: go-web-app
+      app: shop
   template:
     metadata:
       labels:
-        app: go-web-app
+        app: shop
     spec:
       containers:
-      - name: go-web-app
-        image: gokulsm/go-web-app:{{ .Values.image.tag }}
+      - name: shop
+        image: gokulsm/dev:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
