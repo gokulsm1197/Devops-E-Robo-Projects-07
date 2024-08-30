@@ -19,7 +19,7 @@ spec:
       {{ end }}
       containers:
       - name: dispatch
-        image: {{ .Values.image.repo }}/dispatch:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/rs-dispatch:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
           # agent networking access
@@ -35,3 +35,15 @@ spec:
             cpu: 100m
             memory: 50Mi
       restartPolicy: Always
+      {{- with .Values.dispatch.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dispatch.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dispatch.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user
+  name: cart
   labels:
-    service: user
+    service: cart
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: user
+      service: cart
   template:
     metadata:
       labels:
-        service: user
+        service: cart
     spec:
       {{ if .Values.psp.enabled }}
       serviceAccountName: robot-shop
       {{ end }}
       containers:
-      - name: user
-        image: {{ .Values.image.repo }}/rs-user:{{ .Values.image.version }}
+      - name: cart
+        image: {{ .Values.image.repo }}/cart:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # agent networking access
         env:
-          # agent networking access
           - name: INSTANA_AGENT_HOST
             valueFrom:
               fieldRef:
@@ -36,16 +36,3 @@ spec:
           requests:
             cpu: 100m
             memory: 50Mi
-      restartPolicy: Always
-      {{- with .Values.user.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.user.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.user.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}

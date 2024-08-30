@@ -19,7 +19,7 @@ spec:
       {{ end }}
       containers:
       - name: ratings
-        image: {{ .Values.image.repo }}/rs-ratings:{{ .Values.image.version }}
+        image: {{ .Values.image.repo }}/ratings:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 80
@@ -32,22 +32,10 @@ spec:
             memory: 50Mi
         readinessProbe:
           httpGet:
-            path: /_health
+            path: /health
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
           failureThreshold: 30
           successThreshold: 1
       restartPolicy: Always
-      {{- with .Values.ratings.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.ratings.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.ratings.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}

@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user
+  name: dispatch
   labels:
-    service: user
+    service: dispatch
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: user
+      service: dispatch
   template:
     metadata:
       labels:
-        service: user
+        service: dispatch
     spec:
       {{ if .Values.psp.enabled }}
       serviceAccountName: robot-shop
       {{ end }}
       containers:
-      - name: user
-        image: {{ .Values.image.repo }}/rs-user:{{ .Values.image.version }}
+      - name: dispatch
+        image: {{ .Values.image.repo }}/dispatch:{{ .Values.image.version }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
           # agent networking access
@@ -27,8 +27,6 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-        ports:
-        - containerPort: 8080
         resources:
           limits:
             cpu: 200m
@@ -37,15 +35,3 @@ spec:
             cpu: 100m
             memory: 50Mi
       restartPolicy: Always
-      {{- with .Values.user.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.user.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.user.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
